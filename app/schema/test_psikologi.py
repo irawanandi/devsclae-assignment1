@@ -7,7 +7,7 @@ class GroupTestRequest(BaseModel):
 
 
 class GroupTestResponse(BaseModel):
-    group_id: int
+    group_id: str
     nama_group: str
     detail_group: str | None = None
 
@@ -19,7 +19,7 @@ class MetodeTestRequest(BaseModel):
 
 
 class MetodeTestResponse(BaseModel):
-    metode_id: int
+    metode_id: str
     nama_metode: str
     jenis_metode: str
     detail_metode: str | None = None
