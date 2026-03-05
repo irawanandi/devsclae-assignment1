@@ -29,6 +29,9 @@ def add_metode_test(body: MetodeTestRequest, db=Depends(get_db)):
         db.add(new_metode_test)
         db.commit()
     except Exception as e:
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=e)
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=(e)
+        )
 
     return {f"Berhasil Menambahkan {body.nama_metode} sebagai alat test baru"}

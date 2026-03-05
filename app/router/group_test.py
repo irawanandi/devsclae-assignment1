@@ -23,7 +23,11 @@ def add_group_test(body: GroupTestRequest, db=Depends(get_db)):
         )
         db.add(new_group)
         db.commit()
+        db.refresh(new_group)  # untuk load ID
     except Exception as e:
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=e)
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
+        )
 
     return {f"✅️ Group Baru {body.nama_group} Berhasil Ditambahkan!"}
