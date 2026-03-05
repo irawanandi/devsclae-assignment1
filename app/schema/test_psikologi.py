@@ -1,3 +1,4 @@
+from uuid import UUID
 from pydantic import BaseModel
 
 
@@ -7,7 +8,7 @@ class GroupTestRequest(BaseModel):
 
 
 class GroupTestResponse(BaseModel):
-    group_id: str
+    group_id: UUID
     nama_group: str
     detail_group: str | None = None
 
